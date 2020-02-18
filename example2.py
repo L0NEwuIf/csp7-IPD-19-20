@@ -6,14 +6,18 @@
 #     move: A function that returns 'c' or 'b'
 ####
 
-team_name = 'E2'
-strategy_name = 'Collude first 50 rounds unless betrayed. Betray 51st round forward.'
-strategy_description = '''Betray if ever betrayed. If I haven't been betrayed yet, I'll betray 
-starting with the 50th round.\n'''
+team_name = 'Baboons'
+strategy_name = 'Collude and then betray'
+strategy_description = '''collude the first round. If they betray more than 20 times, then we betray. \n'''
     
 def move(my_history, their_history, my_score, their_score):
-   
-    if 'b' in their_history or len(their_history)>50: 
-        return 'b'        
-    else:
-        return 'c'         
+  theirB = 0
+  if len(my_history) == 0:
+      return 'c'
+  for action in their_history:
+    if action == 'b':
+      theirB+=1 
+  if theirB >= 20: 
+      return 'b'        
+  else:
+      return 'c'

@@ -7,14 +7,13 @@
 ####
 
 team_name = 'E1'
-strategy_name = 'Collude but retaliate'
-strategy_description = '''Collude first round. Collude, except in a round after getting a 
-punishment.\n'''
+strategy_name = 'Betray unless colluded'
+strategy_description = '''Betray first round. Betray, except in a round after getting a collude.\n'''
     
 def move(my_history, their_history, my_score, their_score):
-    if len(my_history)==0: # It's the first round; collude.
-        return 'c'
-    elif my_history[-1]=='c' and their_history[-1]=='b':
-        return 'b' 
-    else:
+    if len(my_history)==0: 
+        return 'b'
+    elif their_history[-1]=='c':
         return 'c' 
+    else:
+        return 'b'
